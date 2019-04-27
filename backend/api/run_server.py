@@ -3,8 +3,8 @@ import sys
 import time
 from aiohttp import web
 import logging
-from endpoints import EndPoints
-from predictor import Predict
+from ml_model.endpoints import EndPoints
+from ml_model.predictor import Predict
 
 
 # end-pount settings
