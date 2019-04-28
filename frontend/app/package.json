@@ -1,5 +1,5 @@
 {
-  "name": "fe_test",
+  "name": "color_theory_app",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -14,7 +14,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "color_theory_app"
   },
   "browserslist": {
     "production": [
