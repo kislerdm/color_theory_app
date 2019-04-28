@@ -16,7 +16,7 @@ fi
 usage () {
     cat <<HELP_USAGE
 
-    $0  -p [--port] -f [--force]
+    $0  -p [--port] -f [--force] -r [--rerun]
 
    -p [--port]  Port to expose [default 4500].
 
