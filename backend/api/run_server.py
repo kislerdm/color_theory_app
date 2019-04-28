@@ -2,6 +2,7 @@ import os
 import sys
 import time
 from aiohttp import web
+import argparse
 import logging
 from ml_model.endpoints import EndPoints
 from ml_model.predictor import Predict
@@ -24,6 +25,20 @@ PATH_model = os.path.join(DIR_model, MODEL)
 if not os.path.isfile(PATH_model):
     print(f'No model found in in {PATH_model}')
     sys.exit(1)
+
+
+def get_args():
+    """
+    Parser for input arguments
+    """
+
+    parser = argparse.ArgumentParser(add_help=True,
+                                     description="Backend ML API")
+    parser.add_argument('-p', '--port',
+                        help="Port to expose the API end-points",
+                        default=PORT, type=int)
+
+    return parser.parse_args()
 
 
 def get_logger(log_path: str) -> logging.getLogger:
@@ -55,6 +70,12 @@ if __name__ == '__main__':
     path_log = os.path.join(PATH_log, 'ml_api_{}.log'.format(time.strftime('%Y%m%d', time.localtime())))
     logger = get_logger(path_log)
 
+    # parse args
+    argumets = get_args()
+    port = argumets.port
+
+    logger.info(f"Launch API throuh port {port}")
+
     try:
         # get the model
         predictor = Predict(logger=logger, path_model=PATH_model)
@@ -70,4 +91,4 @@ if __name__ == '__main__':
     app = web.Application()
     app.router.add_get('/rgb', endpoint.get_color_cat_rgb)
     app.router.add_get('/hex', endpoint.get_color_cat_hex)
-    web.run_app(app, port=PORT, reuse_port=True)
+    web.run_app(app, port=port, reuse_port=True)
