@@ -103,4 +103,4 @@ while [ ${runner} -eq 1 ]; do
 
 done
 
-msg "API has lounched successfully"
+msg "API has launched successfully"
