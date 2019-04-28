@@ -2,4 +2,3 @@
 *logs*
 *.ipynb_checkpoints*
 *node_modules*
-*package-lock*
