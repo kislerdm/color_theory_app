@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <title>color theory app</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#000000" />
+  <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+  <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+</head>
+
+<body>
+  <noscript>You need to enable JavaScript to run this app.</noscript>
+
+  <div class="header_title">Define Warm Color</div>
+  <div class="footer">2019 © <a href="https://www.dkisler.de" target="_blank">D. Kisler</a></div>
+
+  <form method="post" class="input">
+
+    <div class="input">
+      <label for="intput_r" id="input">R: </label>
+      <input type="integer" id="input_r" placeholder=255></input>
+    </div>
+    <div class="input">
+      <label for="intput_g" id="input">G: </label>
+      <input type="integer" id="input_g" placeholder=255></input>
+    </div>
+    <div class="input">
+      <label for="intput_b" id="input">B: </label>
+      <input type="integer" id="input_b" placeholder=255></input>
+    </div>
+  </form>
+
+  <button type="button" id="input_apply">Apply</button>
+
+  <div class="output" id="color_type">
+    <label for="output" id="output_lable">Color Type: </label>
+    <output name="color_type" id="output"></output>
+  </div>
+
+</body>
+
+</html>

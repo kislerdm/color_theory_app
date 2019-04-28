@@ -1,0 +1,53 @@
+.header_title {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+}
+
+div.input {
+  display: table-row;
+  display: table-cell;
+}
+
+form.input {
+  margin-top: 70px;
+  display: table;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+
+label#input {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 2px;
+}
+
+#input_apply {
+  margin-top: 20px;
+  width: 40%;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div.output {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 40px;
+  font-size: 25px;
+}
