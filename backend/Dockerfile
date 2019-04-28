@@ -17,6 +17,10 @@ COPY api/ml_model ./ml_model
 # xgboost requirement
 RUN apt-get update && apt-get install libgomp1
 
+# py requirements install
 RUN pip3 install -r requirements.txt
 
-CMD python3 run_server.py
+# get port variable
+ENV PORT 4500
+
+CMD python3 run_server.py -p ${PORT}
