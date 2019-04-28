@@ -2,6 +2,7 @@ import os
 import sys
 import time
 from aiohttp import web
+import aiohttp_cors
 import argparse
 import logging
 from ml_model.endpoints import EndPoints
@@ -67,7 +68,8 @@ def get_logger(log_path: str) -> logging.getLogger:
 
 if __name__ == '__main__':
 
-    path_log = os.path.join(PATH_log, 'ml_api_{}.log'.format(time.strftime('%Y%m%d', time.localtime())))
+    path_log = os.path.join(PATH_log, 'ml_api_{}.log'.format(
+        time.strftime('%Y%m%d', time.localtime())))
     logger = get_logger(path_log)
 
     # parse args
@@ -81,7 +83,8 @@ if __name__ == '__main__':
         predictor = Predict(logger=logger, path_model=PATH_model)
 
         # # get endpoints
-        endpoint = EndPoints(logger=logger, predictor=predictor, content_type=CONTENT_TYPE)
+        endpoint = EndPoints(
+            logger=logger, predictor=predictor, content_type=CONTENT_TYPE)
 
     except Exception as e:
         logger.error(e)
@@ -89,6 +92,22 @@ if __name__ == '__main__':
         sys.exit(1)
 
     app = web.Application()
-    app.router.add_get('/rgb', endpoint.get_color_cat_rgb)
-    app.router.add_get('/hex', endpoint.get_color_cat_hex)
+
+    app.router.add_get("/rgb", endpoint.get_color_cat_rgb)
+    app.router.add_get("/hex", endpoint.get_color_cat_hex)
+
+    # make CORS
+    cors_default_opts = aiohttp_cors.ResourceOptions(allow_credentials=True,
+                                                     expose_headers="*",
+                                                     allow_headers="*",
+                                                     allow_methods=["GET"])
+
+    cors = aiohttp_cors.setup(app, defaults={
+        "https://www.dkisler.de": cors_default_opts,
+        "http://localhost:3000": cors_default_opts
+    })
+
+    for route in list(app.router.routes()):
+        cors.add(route)
+
     web.run_app(app, port=port, reuse_port=True)
