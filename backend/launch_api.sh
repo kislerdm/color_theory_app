@@ -59,7 +59,7 @@ docker_run () {
 # check if image was built
 imageId=$(docker images ${IMAGE} -q)
 
-if [ "${imageId}" == "" ]; then
+if [[ ("${imageId}" == "") || (${FORCE} -eq 1) ]]; then
   msg "Build image ${IMAGE}"
 
   docker build -t ${IMAGE} .

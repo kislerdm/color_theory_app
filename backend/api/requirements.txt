@@ -1,4 +1,5 @@
 aiohttp
+aiohttp-cors
 pandas
 xgboost
 sklearn
