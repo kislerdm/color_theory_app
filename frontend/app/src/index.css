@@ -17,27 +17,20 @@
 }
 
 div.input {
-  display: table-row;
-  display: table-cell;
+  margin-top: 150px;
 }
 
-form.input {
-  margin-top: 70px;
-  display: table;
+#color_picker {
+  margin-left: 10px;
   position: relative;
   left: 50%;
   transform: translate(-50%, -50%);
-}
-
-
-label#input {
-  margin-bottom: 10px;
-  padding-left: 10px;
-  padding-right: 2px;
+  height: 200px;
+  width: 300px;
 }
 
 #input_apply {
-  margin-top: 20px;
+  margin-top: 10px;
   width: 40%;
   position: relative;
   left: 50%;
@@ -48,6 +41,6 @@ div.output {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 40px;
+  margin-top: 20px;
   font-size: 25px;
 }
