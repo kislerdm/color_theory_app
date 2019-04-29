@@ -1,7 +1,11 @@
+import "./jscolor.js"
+
 var axios = require('axios')
 
 // get button
 var fire = document.getElementById("input_apply");
+// get color
+var col = document.getElementById("color_value")
 
 var requestor = axios.create({
   baseURL: "https://www.dkisler.de/api/color_theory_app/backend"
@@ -9,16 +13,12 @@ var requestor = axios.create({
 
 if (fire) {
   fire.addEventListener("click", function() {
-    let r = document.getElementById("input_r").value;
-    let g = document.getElementById("input_g").value;
-    let b = document.getElementById("input_b").value;
+
     let out = document.getElementById("output");
 
-    requestor.get('/rgb', {
+    requestor.get('/hex', {
         params: {
-          r: r,
-          g: g,
-          b: b
+          hexcode: col.value
         }
       })
       .then(function(response) {

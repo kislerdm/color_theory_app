@@ -16,21 +16,10 @@
   <div class="header_title">Define Warm Color</div>
   <div class="footer">2019 © <a href="https://www.dkisler.de" target="_blank">D. Kisler</a></div>
 
-  <form method="post" class="input">
-
-    <div class="input">
-      <label for="intput_r" id="input">R: </label>
-      <input type="integer" id="input_r" placeholder=255></input>
-    </div>
-    <div class="input">
-      <label for="intput_g" id="input">G: </label>
-      <input type="integer" id="input_g" placeholder=255></input>
-    </div>
-    <div class="input">
-      <label for="intput_b" id="input">B: </label>
-      <input type="integer" id="input_b" placeholder=255></input>
-    </div>
-  </form>
+  <div class="input">
+    <input name="color" type="hidden" id="color_value" value="000">
+    <button class="jscolor {valueElement: 'color_value'}" id="color_picker">Pick a color</button>
+  </div>
 
   <button type="button" id="input_apply">Apply</button>
 
