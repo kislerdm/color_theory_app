@@ -22,9 +22,9 @@ if (fire) {
         }
       })
       .then(function(response) {
-        var type = 'warm';
+        var type = 'Warm';
         if (response.data.data.is_warm === 0) {
-          type = 'cool'
+          type = 'Cool'
         }
 
         out.innerHTML = type;
