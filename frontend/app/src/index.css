@@ -44,3 +44,7 @@ div.output {
   margin-top: 20px;
   font-size: 25px;
 }
+
+output#output {
+  padding-left: 2px;
+}
