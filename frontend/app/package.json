@@ -10,9 +10,10 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build_dev": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
+    "build": "GENERATE_SOURCEMAP=false react-scripts build",
     "deploy": "aws s3 sync build/ s3://color-theory-app"
   },
   "eslintConfig": {
