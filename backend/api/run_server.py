@@ -105,7 +105,7 @@ if __name__ == '__main__':
     cors = aiohttp_cors.setup(app, defaults={
         "https://www.dkisler.de": cors_default_opts,
         "http://localhost:3000": cors_default_opts,
-        "http://color-theory-app.s3-website-eu-west-1.amazonaws.com/": cors_default_opts
+        "http://color-theory-app.s3-website-eu-west-1.amazonaws.com": cors_default_opts
     })
 
     for route in list(app.router.routes()):
