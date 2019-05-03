@@ -8,7 +8,7 @@ var fire = document.getElementById("input_apply");
 var col = document.getElementById("color_value")
 
 var requestor = axios.create({
-  baseURL: "https://www.dkisler.de/api/color_theory_app/backend"
+  baseURL: "http://localhost:4500"
 });
 
 if (fire) {
