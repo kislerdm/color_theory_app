@@ -1,0 +1,14 @@
+version: '3.7'
+
+services:
+  backend:
+    build: './backend'
+    ports:
+      - "${PORT_BE}:4500"
+  frontend:
+    build:
+      context: './frontend'
+      args:
+        APIURL: ${BACKEND_API}
+    ports:
+      - "${PORT_FE}:80"
