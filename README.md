@@ -18,7 +18,10 @@ color_theory_app
     └── frontend
 ```
 
-The app has two service sides, frontend and backend.
+The app has two service sides, frontend and backend:
+
+- *frontend* can be generalised as the product with software engineers + DevOps maintaining and developing it
+- *backend* can be generalised as the micro-service with data scientist/engineers/machine learning engineers + Dev-/DataOps maintaining and developing it
 
 ### Backend
 
@@ -34,7 +37,7 @@ backend
       └── model.ipynb
 ```
 
-The models can be *iteratively* developed within the flow:
+The models can be *iteratively* developed by the data scientists according to the flow:
 
 ```
 consume data from data dir -> model training and evaluate service (model.ipynb) -> model export into model dir
@@ -42,7 +45,7 @@ consume data from data dir -> model training and evaluate service (model.ipynb) 
 
 #### API Service
 
-Backend has the interface(s) to communicate with other services (fronted service in our case) with a set of end-points.
+Backend has the interface(s) to communicate with other services (fronted service in our case) with a set of end-points. It's usually being developed by data scientists, engineers, or machine learning engineers.
 
 ```
 backend
