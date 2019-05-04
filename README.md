@@ -23,6 +23,8 @@ The app has two service sides, frontend and backend:
 - *frontend* can be generalised as the product with software engineers + DevOps maintaining and developing it
 - *backend* can be generalised as the micro-service with data scientist/engineers/machine learning engineers + Dev-/DataOps maintaining and developing it
 
+Frontend/product communicates to the backend/machine-learning service to provide users unique feature, or improve users experience.
+
 ### Backend
 
 #### Machine Learning Model Development
