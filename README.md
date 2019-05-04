@@ -73,7 +73,11 @@ Frontend service of the app gives a user the web interface to select a color of 
 
 #### App Screenshot
 
-![App Screen](fig/app_screen.png)
+![app_screen](fig/app_screen.png)
+
+## App/Project Infrastructure
+
+![app_infra](fig/infrastructure.png)
 
 ## Run the app
 
