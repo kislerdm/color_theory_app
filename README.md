@@ -1,4 +1,4 @@
-# Color Theory App
+# Color Theory <a href="http://color-theory-app.s3-website-eu-west-1.amazonaws.com" target="_blank">App</a>
 
 ## Description
 
@@ -6,7 +6,7 @@ A toy project/demo on how to structure and develop micro-service driven applicat
 
 ## App Idea
 
-The app objective is to define **binary category** of a color selecte by user. Two possible categories being *warm* and *cool* are <a href="https://en.wikipedia.org/wiki/Color_theory#Warm_vs._cool_colors" target="_blank">described</a> as following:
+The app objective is to define **binary category** of a color selected by user. Two possible categories being *warm* and *cool* are <a href="https://en.wikipedia.org/wiki/Color_theory#Warm_vs._cool_colors" target="_blank">described</a> as following:
 
 > Color theory has described perceptual and psychological effects to this contrast. Warm colors are said to advance or appear more active in a painting, while cool colors tend to recede; used in interior design or fashion, warm colors are said to arouse or stimulate the viewer, while cool colors calm and relax.
 
@@ -34,7 +34,7 @@ backend
       └── model.ipynb
 ```
 
-The models can be *iteratively* developed following the flow:
+The models can be *iteratively* developed within the flow:
 
 ```
 consume data from data dir -> model training and evaluate service (model.ipynb) -> model export into model dir
@@ -42,7 +42,7 @@ consume data from data dir -> model training and evaluate service (model.ipynb) 
 
 #### API Service
 
-Backend has the interface, API to communicate with other services (fronted service in our case) with a set of end-points.
+Backend has the interface(s) to communicate with other services (fronted service in our case) with a set of end-points.
 
 ```
 backend
