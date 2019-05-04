@@ -43,7 +43,7 @@ The models can be *iteratively* developed by the data scientists according to th
 consume data from data dir -> model training and evaluate service (model.ipynb) -> model export into model dir
 ```
 
-#### API Service
+#### ML API Service
 
 Backend has the interface(s) to communicate with other services (fronted service in our case) with a set of end-points. It's usually being developed by data scientists, engineers, or machine learning engineers.
 
@@ -94,3 +94,5 @@ and run the launch script
 ```bash
 sh launch_services.sh
 ```
+
+Upon docker images build completion and when docker containers are up and running, you can access UI by going to http://localhost:3000 in your browser.
