@@ -8,7 +8,7 @@ var fire = document.getElementById("input_apply");
 var col = document.getElementById("color_value")
 
 var requestor = axios.create({
-  baseURL: "http://localhost:4500"
+  baseURL: "api_url"
 });
 
 if (fire) {

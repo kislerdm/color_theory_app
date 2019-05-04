@@ -1,11 +1,14 @@
-version:      '3'
+version: '3.7'
 
 services:
   backend:
-    build:    './backend'
+    build: './backend'
     ports:
-      - "4500:4500"
+      - "${PORT_BE}:4500"
   frontend:
-    build:    './frontend'
+    build:
+      context: './frontend'
+      args:
+        APIURL: ${BACKEND_API}
     ports:
-      - "3000:80"
+      - "${PORT_FE}:80"

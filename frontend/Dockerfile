@@ -8,9 +8,15 @@ RUN mkdir -p /app /app/src /app/public
 
 WORKDIR /app
 
+# backend URL
+ARG APIURL
+
 COPY ./app/package.json ./app/yarn.lock ./
 COPY ./app/src ./src
 COPY ./app/public ./public
+
+# use provided end-point URL
+RUN sed "s;api_url;${APIURL};g" src/call.js -i
 
 RUN yarn && yarn build
 
