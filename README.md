@@ -84,8 +84,19 @@ Frontend service of the app gives a user the web interface to select a color of 
 ### Requirements
 
 ```bash
-docker ver. >= 18.09
+docker ver. >= 18.09.2
+docker-compose >= 1.23.2
 ```
+
+### Install requirements
+
+Docker:
+- <a href="https://docs.docker.com/install/linux/docker-ce/ubuntu/" target="_blank">Ubuntu</a>
+- <a href="https://docs.docker.com/docker-for-mac/install/" target="_blank">MacOs</a>
+- <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank">Windows</a>
+
+Docker-compose:
+- <a href="https://docs.docker.com/compose/install/" target="_blank">Cross-platform</a>
 
 ## App Launch
 
