@@ -85,7 +85,7 @@ Frontend service of the app gives a user the web interface to select a color of 
 
 ```bash
 docker ver. >= 18.09.2
-docker-compose >= 1.23.2
+docker-compose ver. >= 1.23.2
 ```
 
 ### Install requirements
