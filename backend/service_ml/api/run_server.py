@@ -82,7 +82,7 @@ if __name__ == '__main__':
         # get the model
         predictor = Predict(logger=logger, path_model=PATH_model)
 
-        # # get endpoints
+        # get endpoints
         endpoint = EndPoints(
             logger=logger, predictor=predictor, content_type=CONTENT_TYPE)
 

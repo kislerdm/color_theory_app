@@ -1,0 +1,5 @@
+aiohttp==3.4.4
+aiohttp-cors==0.7.0
+pandas==0.23.1
+xgboost==0.82
+sklearn==0.20.2

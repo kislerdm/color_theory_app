@@ -1,7 +1,8 @@
 FROM python:3.6-slim
 
-LABEL maintainer=dkisler \
-      email=admin@dkisler.de
+LABEL maintainer="Dmitry Kisler" \
+      email=admin@dkisler.com \
+      web=www.dkisler.com
 
 RUN mkdir -p backend/api backend/ml/model
 
