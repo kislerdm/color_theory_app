@@ -1,10 +1,14 @@
 version: '3.7'
 
 services:
-  backend:
-    build: './backend'
+  backend_base:
+    build: './backend/service_base'
     ports:
-      - "${PORT_BE}:4500"
+      - "${PORT_BE_BASE}:4499"
+  backend_ml:
+    build: './backend/service_ml'
+    ports:
+      - "${PORT_BE_ML}:4500"
   frontend:
     build:
       context: './frontend'
