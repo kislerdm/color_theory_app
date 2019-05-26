@@ -3,8 +3,7 @@ import sys
 import time
 from aiohttp import web
 import aiohttp_cors
-import argparse
-import logging
+from color_theory_app_backend_libs import utils
 from ml_model.endpoints import EndPoints
 from ml_model.predictor import Predict
 
@@ -28,52 +27,14 @@ if not os.path.isfile(PATH_model):
     sys.exit(1)
 
 
-def get_args():
-    """
-    Parser for input arguments
-    """
-
-    parser = argparse.ArgumentParser(add_help=True,
-                                     description="Backend ML API")
-    parser.add_argument('-p', '--port',
-                        help="Port to expose the API end-points",
-                        default=PORT, type=int)
-
-    return parser.parse_args()
-
-
-def get_logger(log_path: str) -> logging.getLogger:
-    """
-    Initiate logger instance
-
-            Args:
-                log_path: str path to log file
-
-            Returns:
-                logger
-    """
-
-    path = os.path.dirname(log_path)
-    if not os.path.isdir(path):
-        os.makedirs(path)
-
-    logging.basicConfig(level=logging.INFO,
-                        format='%(asctime)s.%(msecs)03d [%(levelname)s] %(message)s',
-                        datefmt='%Y-%m-%d %H:%M:%S',
-                        filename=log_path,
-                        filemode='a+')
-
-    return logging.getLogger('logs')
-
-
 if __name__ == '__main__':
 
     path_log = os.path.join(PATH_log, 'ml_api_{}.log'.format(
         time.strftime('%Y%m%d', time.localtime())))
-    logger = get_logger(path_log)
+    logger = utils.get_logger(path_log)
 
     # parse args
-    argumets = get_args()
+    argumets = utils.get_args()
     port = argumets.port
 
     logger.info(f"Launch API throuh port {port}")
@@ -93,8 +54,8 @@ if __name__ == '__main__':
 
     app = web.Application()
 
-    app.router.add_get("/rgb", endpoint.get_color_cat_rgb)
-    app.router.add_get("/hex", endpoint.get_color_cat_hex)
+    app.router.add_get("/type/rgb", endpoint.get_color_cat_rgb)
+    app.router.add_get("/type/hex", endpoint.get_color_cat_hex)
 
     # make CORS
     cors_default_opts = aiohttp_cors.ResourceOptions(allow_credentials=True,
