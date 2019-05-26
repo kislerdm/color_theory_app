@@ -9,7 +9,8 @@ RUN mkdir -p /app /app/src /app/public
 WORKDIR /app
 
 # backend URL
-ARG APIURL
+ARG APIURL_BASE
+ARG APIURL_ML
 
 COPY ./app/package.json ./app/yarn.lock ./
 COPY ./app/src ./src

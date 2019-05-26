@@ -13,6 +13,7 @@ services:
     build:
       context: './frontend'
       args:
-        APIURL: ${BACKEND_API}
+        APIURL_BASE: ${BACKEND_API_BASE}
+        APIURL_ML: ${BACKEND_API_ML}
     ports:
       - "${PORT_FE}:80"

@@ -76,9 +76,14 @@ while [ "$1" != "" ]; do
 done
 
 # check the API URL
+if [[ ( ! ${PORT_BE_BASE} -eq ${PORT_BE_BASE0} ) &&
+     ( "${BACKEND_API_BASE}" == "${BACKEND_API_BASE0}" ) ]]; then
+       BACKEND_API_BASE=http://localhost:${PORT_BE_BASE}
+fi
+
 if [[ ( ! ${PORT_BE_ML} -eq ${PORT_BE_ML0} ) &&
-     ( "${BACKEND_API}" == "${BACKEND_API0}" ) ]]; then
-       BACKEND_API=http://localhost:${PORT_BE_ML}
+     ( "${BACKEND_API_ML}" == "${BACKEND_API_ML0}" ) ]]; then
+       BACKEND_API_ML=http://localhost:${PORT_BE_ML}
 fi
 
 # export variables
