@@ -32,9 +32,11 @@ FORCE=0
 usage () {
     cat <<HELP_USAGE
 
-    $0 -f --force --port_be_base --port_be_ml --port_fe --urlbase --urlml
+    $0 -f --image --force --port_be_base --port_be_ml --port_fe --urlbase --urlml
 
    -f docker-compose file
+
+   --image image name
 
    --force force rebuild
 
@@ -60,6 +62,9 @@ while [ "$1" != "" ]; do
     case $1 in
         -f )                    shift
                                 FILE=$1
+                                ;;
+        --image )               shift
+                                IMAGE=$1
                                 ;;
         --force )               shift
                                 FORCE=1
@@ -115,9 +120,9 @@ export BACKEND_API_ML=${BACKEND_API_ML}
 
 docker_compose_build () {
   if [ ${FORCE} -eq 1 ]; then
-    docker-compose -p ${IMAGE} up -d --build
+    docker-compose -p ${IMAGE} -f ${FILE} up -d --build
   else
-    docker-compose -p ${IMAGE} up -d
+    docker-compose -p ${IMAGE} -f ${FILE} up -d
   fi
 }
 
