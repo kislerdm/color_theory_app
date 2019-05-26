@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+
+  backend_base:
+    build:
+      context: './backend'
+      dockerfile: 'service_base/Dockerfile'
+    ports:
+      - "${PORT_BE_BASE}:4499"
+
+  frontend:
+    build:
+      context: './frontend'
+      args:
+        APIURL_BASE: ${BACKEND_API_BASE}
+    ports:
+      - "${PORT_FE}:80"
