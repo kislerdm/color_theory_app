@@ -1,10 +1,6 @@
 import json
 from aiohttp import web
-from typing import Tuple, NamedTuple
-from collections import namedtuple
-
-# converted HEX2RGB
-rgb = namedtuple('RGB', 'r g b')
+from color_theory_app_backend_libs.utils import hex2rgb
 
 
 class EndPoints:
@@ -17,23 +13,6 @@ class EndPoints:
         self.content_type = content_type
         self.logger = logger
         self.predictor = predictor
-
-    @classmethod
-    def _hex2rgb(self, hexcode: str) -> Tuple[NamedTuple('RGB', r=int, g=int, b=int), str]:
-        """
-        Function to convert HEX to RGB color code
-
-            Args:
-                hexcode: string HEX color code
-
-            Returns:
-                named tuple of (r,g,b) -> (int,int,int)
-        """
-        hex = hexcode.replace('#', '')
-        if len(hex) != 6:
-            return None, 'Wrong HEX format'
-
-        return rgb(int(hex[:2], 16), int(hex[2:4], 16), int(hex[4:6], 16)), None
 
     def _response_api(self, payload=None) -> web.Response:
         """
@@ -63,10 +42,10 @@ class EndPoints:
             return None
 
         return {'data': {
-                    "color": {'r': r, 'g': g, 'b': b},
-                    'is_warm': prediction
-                    }
-                }
+            "color": {'r': r, 'g': g, 'b': b},
+            'is_warm': prediction
+        }
+        }
 
     def get_color_cat_rgb(self, request):
         """
@@ -111,7 +90,7 @@ class EndPoints:
                 return self._response_api()
 
             hexcode = request.query['hexcode']
-            rgb, err = self._hex2rgb(hexcode)
+            rgb, err = hex2rgb(hexcode)
 
             if err:
                 self.logger.error(err)

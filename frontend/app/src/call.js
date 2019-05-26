@@ -16,7 +16,7 @@ if (fire) {
 
     let out = document.getElementById("output");
 
-    requestor.get('/hex', {
+    requestor.get('/type/hex', {
         params: {
           hexcode: col.value
         }
