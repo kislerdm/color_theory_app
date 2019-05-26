@@ -20,6 +20,6 @@ COPY service_base/api/color_name ./color_name
 RUN pip3 install -r requirements.txt
 
 # get port variable
-ENV PORT 4499
+ENV PORT 4500
 
 CMD python3 run_server.py -p ${PORT}
