@@ -6,6 +6,7 @@
 
 # images name
 IMAGE=color_theory_app
+FILE=docker-compose.yaml
 
 # host ports
 PORT_BE_ML0=4500
@@ -31,7 +32,9 @@ FORCE=0
 usage () {
     cat <<HELP_USAGE
 
-    $0 --force --port_be_base --port_be_ml --port_fe --urlbase --urlml
+    $0 -f --force --port_be_base --port_be_ml --port_fe --urlbase --urlml
+
+   -f docker-compose file
 
    --force force rebuild
 
@@ -55,6 +58,9 @@ msg () {
 # parse arguments
 while [ "$1" != "" ]; do
     case $1 in
+        -f )                    shift
+                                FILE=$1
+                                ;;
         --force )               shift
                                 FORCE=1
                                 ;;
@@ -81,6 +87,11 @@ while [ "$1" != "" ]; do
     esac
     shift
 done
+
+if [ ! -f ${FILE} ]; then
+  msg "File ${FILE} doesn't exist"
+  exit 1
+fi
 
 # check the API URL
 if [[ ( ! ${PORT_BE_BASE} -eq ${PORT_BE_BASE0} ) &&
