@@ -18,6 +18,7 @@
 
 div.input {
   margin-top: 150px;
+  margin-bottom: -70px;
 }
 
 #color_picker {
@@ -30,8 +31,7 @@ div.input {
 }
 
 #input_apply {
-  margin-top: 10px;
-  width: 40%;
+  width: 300px;
   position: relative;
   left: 50%;
   transform: translate(-50%, -50%);
@@ -41,7 +41,7 @@ div.output {
   position: absolute;
   left: 50%;
   transform: translate(-50%, -50%);
-  margin-top: 20px;
+  margin-top: 50px;
   font-size: 25px;
 }
 

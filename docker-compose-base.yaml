@@ -12,6 +12,7 @@ services:
   frontend:
     build:
       context: './frontend'
+      dockerfile: 'Dockerfile-base'
       args:
         APIURL_BASE: ${BACKEND_API_BASE}
     ports:
