@@ -17,7 +17,7 @@ COPY ./app/src ./src
 COPY ./app/public ./public
 
 # use provided end-point URL
-RUN sed "s;api_url;${APIURL};g" src/call.js -i
+RUN sed "s;api_url;${APIURL_ML};g" src/call.js -i
 
 RUN yarn && yarn build
 

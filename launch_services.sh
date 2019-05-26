@@ -24,12 +24,16 @@ BACKEND_API_ML=${BACKEND_API_ML0}
 BACKEND_API_BASE0=http://localhost:${PORT_BE_BASE}
 BACKEND_API_BASE=${BACKEND_API_BASE0}
 
+# flags
+FORCE=0
 
 # launch backend API
 usage () {
     cat <<HELP_USAGE
 
-    $0  --port_be_base --port_be_ml --port_fe --urlbase --urlml
+    $0 --force --port_be_base --port_be_ml --port_fe --urlbase --urlml
+
+   --force force rebuild
 
    --port_be_base Port to expose backend BASE API end-point [default 4499].
 
@@ -51,6 +55,9 @@ msg () {
 # parse arguments
 while [ "$1" != "" ]; do
     case $1 in
+        --force )               shift
+                                FORCE=1
+                                ;;
         --port_be_base )        shift
                                 PORT_BE_BASE=$1
                                 ;;
@@ -96,7 +103,11 @@ export BACKEND_API_ML=${BACKEND_API_ML}
 # build and run microservices containers
 
 docker_compose_build () {
-  docker-compose -p ${IMAGE} up -d
+  if [ ${FORCE} -eq 1 ]; then
+    docker-compose -p ${IMAGE} up -d --build
+  else
+    docker-compose -p ${IMAGE} up -d
+  fi
 }
 
 msg "Build and run images for ${IMAGE}"
