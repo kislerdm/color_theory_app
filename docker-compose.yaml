@@ -7,7 +7,7 @@ services:
       context: './backend'
       dockerfile: 'service_base/Dockerfile'
     ports:
-      - "${PORT_BE_BASE}:4499"
+      - "${PORT_BE_BASE}:4500"
 
   backend_ml:
     build:

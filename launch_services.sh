@@ -8,22 +8,23 @@
 IMAGE=color_theory_app
 FILE=docker-compose.yaml
 
-# host ports
-PORT_BE_ML0=4500
-PORT_BE_ML=${PORT_BE_ML0}
-
-PORT_BE_BASE0=4499
-PORT_BE_BASE=${PORT_BE_BASE0}
-
+# ports
 PORT_FE0=3000
 PORT_FE=${PORT_FE0}
 
-# backend API end-point
-BACKEND_API_ML0=http://localhost:${PORT_BE_ML}
-BACKEND_API_ML=${BACKEND_API_ML0}
+PORT_BE_BASE0=4500
+PORT_BE_BASE=${PORT_BE_BASE0}
 
+PORT_BE_ML0=4501
+PORT_BE_ML=${PORT_BE_ML0}
+
+
+# backend API end-point
 BACKEND_API_BASE0=http://localhost:${PORT_BE_BASE}
 BACKEND_API_BASE=${BACKEND_API_BASE0}
+
+BACKEND_API_ML0=http://localhost:${PORT_BE_ML}
+BACKEND_API_ML=${BACKEND_API_ML0}
 
 # flags
 FORCE=0
@@ -40,15 +41,15 @@ usage () {
 
    --force force rebuild
 
-   --port_be_base Port to expose backend BASE API end-point [default 4499].
+   --port_be_base Port to expose backend BASE API end-point [default ${PORT_BE_BASE0}].
 
-   --port_be_ml Port to expose backend ML API end-point [default 4500].
+   --port_be_ml Port to expose backend ML API end-point [default ${PORT_BE_ML0}].
 
-   --port_fe Port to serve frontend app [default 3000].
+   --port_fe Port to serve frontend app [default ${PORT_FE0}].
 
    --urlbase URL to access backend BASE API by the frontend app [delafut ${BACKEND_API_BASE0}]
 
-   --urlml URL to access backend ML API by the frontend app [delafut ${PORT_BE_ML0}]
+   --urlml URL to access backend ML API by the frontend app [delafut ${BACKEND_API_ML0}]
 
 HELP_USAGE
 }
