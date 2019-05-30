@@ -1,0 +1,50 @@
+.header_title {
+  position: fixed;
+  top: 0px;
+  width: 100%;
+  text-align: center;
+  background: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+  color: #fff;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+.footer {
+  position: fixed;
+  bottom: 0px;
+  width: 100%;
+  text-align: center;
+}
+
+div.input {
+  margin-top: 150px;
+  margin-bottom: -70px;
+}
+
+#color_picker {
+  margin-left: 10px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  height: 200px;
+  width: 300px;
+}
+
+#input_apply {
+  width: 300px;
+  position: relative;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+div.output {
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  margin-top: 50px;
+  font-size: 25px;
+}
+
+output#output {
+  padding-left: 2px;
+}
