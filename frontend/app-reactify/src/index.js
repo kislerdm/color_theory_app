@@ -29,18 +29,46 @@ const footer = (
   </div>
 );
 
-const go_button = (
-  <button type="button" id="input_apply">Search</button>
-);
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {isToggleOn: true};
+
+    // This binding is necessary to make `this` work in the callback
+    this.handleClick = this.handleClick.bind(this);
+  }
+
+  handleClick() {
+    this.setState(state => ({
+      isToggleOn: !state.isToggleOn
+    }));
+  }
+
+  render() {
+    return (
+      <button onClick={this.handleClick}>
+        {this.state.isToggleOn ? 'ON' : 'OFF'}
+      </button>
+    );
+  }
+}
 
 const elements = [
   header,
-  footer,
-  input,
-  go_button
+  footer
 ];
 
 ReactDOM.render(
   elements,
   document.getElementById('root')
+);
+
+ReactDOM.render(
+  input,
+  document.getElementById('input')
+);
+
+ReactDOM.render(
+  <Toggle/>,
+  document.getElementById('input_apply')
 );
