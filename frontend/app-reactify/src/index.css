@@ -36,3 +36,9 @@ div.input {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
+.container {
+  width: 960px;
+  margin: auto;
+  padding-top: 100px;
+}
