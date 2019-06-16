@@ -1,36 +1,31 @@
-version:             '3.7'
+version:          '3.7'
 
 services:
 
   backend_base:
     build:
-      context:       './backend'
-      dockerfile:    'service_base/Dockerfile'
+      context:    './backend'
+      dockerfile: 'service_base/Dockerfile'
     ports:
-      - "${PORT_BE_BASE}:4500"
+      - "10002:4500"
 
   backend_ml:
     build:
-      context:       './backend'
-      dockerfile:    'service_ml/Dockerfile'
+      context:    './backend'
+      dockerfile: 'service_ml/Dockerfile'
     ports:
-      - "${PORT_BE_ML}:4500"
+      - "10003:4500"
 
   frontend_base:
     build:
-      context:       './frontend'
-      dockerfile:    'Dockerfile-base'
-      args:
-        APIURL_BASE: ${BACKEND_API_BASE}
+      context:    './frontend'
+      dockerfile: 'Dockerfile-base'
     ports:
       - "10000:80"
 
   frontend:
     build:
-      context:       './frontend'
-      dockerfile:    'Dockerfile'
-      args:
-        APIURL_BASE: ${BACKEND_API_BASE}
-        APIURL_ML:   ${BACKEND_API_ML}
+      context:    './frontend'
+      dockerfile: 'Dockerfile'
     ports:
       - "10001:80"
