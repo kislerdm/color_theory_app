@@ -1,33 +1,22 @@
-# 1. build the frontend
-FROM node:8.16-alpine as eng
+FROM node:12.2.0-alpine
 
-LABEL maintainer=dkisler \
-      email=admin@dkisler.de
+LABEL maintainer="Dmitry Kisler" \
+      email=admin@dkisler.com \
+      web=www.dkisler.com
 
-RUN mkdir -p /app-base /app-base/src /app-base/public
+RUN mkdir -p /app-base/src /app-base/public
 
 WORKDIR /app-base
 
-# backend URL
-ARG APIURL_BASE
-ARG APIURL_ML
-
-COPY ./app-base/package.json ./app-base/yarn.lock ./
+COPY ./app-base/package.json ./
+COPY ./app-base/.env ./
 COPY ./app-base/src ./src
 COPY ./app-base/public ./public
 
-# use provided end-point URL
-RUN sed "s;api_url;${APIURL_BASE};g" src/features/get_color_name.js -i
-
-RUN yarn && yarn build
-
-# # 2. run the app
-FROM nginx:1.15.12-alpine
-
-COPY --from=eng /app-base/build /usr/share/nginx/html
+RUN yarn install
+RUN yarn build
+RUN yarn global add serve
 
 ENV PORT 80
 
-EXPOSE ${PORT}
-
-CMD ["nginx", "-g", "daemon off;"]
+CMD serve -s build -p ${PORT}
