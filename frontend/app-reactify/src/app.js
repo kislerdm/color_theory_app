@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react';
-import ColorPickerApp from './color-picker';
+import ColorProperties from './features-logic';
 
 const app_name = 'Color Theory App';
 
@@ -10,13 +10,13 @@ const footer_obj = {
 };
 
 const Header = ({ app_name }) => (
-  <div class="header">
+  <div className="header">
       {app_name}
   </div>
 );
 
 function Footer({ web, text, prefix }) {
-  return <div class="footer">
+  return <div className="footer">
       {prefix}
       <a href={web} target="_blank">
         {text}
@@ -27,7 +27,7 @@ function Footer({ web, text, prefix }) {
 const App = () => (
   <Fragment>
     <Header app_name={app_name} />
-    <ColorPickerApp />
+    <ColorProperties />
     <Footer {...footer_obj} />
   </Fragment>
 );
