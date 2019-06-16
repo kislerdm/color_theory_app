@@ -1,4 +1,4 @@
-.header{
+.header {
   position: fixed;
   top: 0px;
   width: 100%;
@@ -16,23 +16,37 @@
   text-align: center;
 }
 
-div.input {
-  margin-top: 150px;
-  margin-bottom: -70px;
+.container {
+  width: 960px;
+  margin: auto;
+  padding-top: 100px;
 }
 
-#color_picker {
-  margin-left: 10px;
+.color_input {
+  margin-top: -50px;
   position: relative;
   left: 50%;
+  transform: translate(-50%, -50%);
+  height: 100px;
+  width: 300px;
+}
+
+.color_sample {
+  position: relative;
+  margin-top: 5%;
+  left: 51%;
   transform: translate(-50%, -50%);
   height: 200px;
   width: 300px;
 }
 
-#input_apply {
-  width: 300px;
+.color_output {
+  margin-top: -10px;
+  margin-left: 5%;
   position: relative;
   left: 50%;
   transform: translate(-50%, -50%);
+  height: 100px;
+  width: 300px;
+  font-size: 20px;
 }

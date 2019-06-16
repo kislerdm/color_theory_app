@@ -69,6 +69,10 @@ sh launch_api.sh
 
 ### Frontend
 
+# ToDo
+
+- replace jscolor with https://casesandberg.github.io/react-color/
+
 Frontend service of the app gives a user the web interface to select a color of interest and define its category by communicating with the backend via its API end-point(s).
 
 #### App Screenshot
