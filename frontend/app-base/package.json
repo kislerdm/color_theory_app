@@ -2,6 +2,7 @@
   "name": "color-theory-app",
   "version": "1.0.1",
   "main": "index.js",
+  "homepage": "https://color-theory-app-base.dkisler.com",
   "license": "MIT",
   "dependencies": {
     "dotenv": "^8.0.0",

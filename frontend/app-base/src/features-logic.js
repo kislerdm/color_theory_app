@@ -23,11 +23,7 @@ export default class ColorProperties extends React.Component {
 
     const hex = hexCut(color.hex);
 
-    console.log(process.env.REACT_APP_URL_BACKEND_BASE);
-
-    const url_name = `${process.env.PUBLIC_URL}${process.env.REACT_APP_URL_BACKEND_BASE}?hexcode=${hex}`;
-
-    console.log(url_name);
+    const url_name = `${process.env.REACT_APP_URL_BACKEND_BASE}?hexcode=${hex}`;
 
     fetch(url_name)
       .then(response => response.json())
