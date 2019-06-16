@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { DemoSquare, Hex, Rgb, Name, Type } from './features';
+import React from 'react';
+import { Hex, Rgb, Name, Type } from './features';
 import { HuePicker } from 'react-color';
 
 const fe_features = [
@@ -15,7 +15,7 @@ export default class ColorProperties extends React.Component {
   state = {
     background: '#000000',
     name: 'Black',
-    type: "Cool"
+    type: 'Cool'
   };
 
   handleChangeComplete = (color) => {
@@ -24,16 +24,19 @@ export default class ColorProperties extends React.Component {
 
     const hex = hexCut(color.hex);
 
-    const url_name = `https://color-theory-app.dkisler.com/api/name/name/hex?hexcode=${hex}`;
+    const url_name = `${process.env.REACT_APP_URL_BACKEND_BASE}?hexcode=${hex}`;
+
     fetch(url_name)
       .then(response => response.json())
       .then(data => this.setState({ name: data.data.name }));
 
-    const url_type = `https://color-theory-app.dkisler.com/api/type/type/hex?hexcode=${hex}`;
-    fetch(url_type)
+    const url_ml = `${process.env.REACT_APP_URL_BACKEND_ML}?hexcode=${hex}`;
+
+    fetch(url_ml)
       .then(response => response.json())
-      .then(data => this.setState({ type: (data.data.is_warm===0) ? "Cool":"Warm" }));
-  };
+      .then(data => this.setState({ type: (data.data.is_warm===0) ? 'Cool':'Warm' }));
+
+    };
 
   render() {
     return (
@@ -41,6 +44,7 @@ export default class ColorProperties extends React.Component {
 
         <div className="color_sample" style={this.state}></div>
         <div className="color_input">
+
         <p align="center">Pick a color on slider</p>
           <HuePicker
             color={ this.state.background }

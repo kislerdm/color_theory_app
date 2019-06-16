@@ -1,10 +1,5 @@
 import React from 'react'
 
-export function DemoSquare( {color} ) {
-  return <div className="color_sample" style="background-color:{color};">
-  </div>
-};
-
 export function Hex( {color} ) {
   return <div>
     <label htmlFor="code_hex" id="output_label">Color HEX Code:</label>
@@ -40,7 +35,7 @@ export function Name( {name} ) {
 
 export function Type( {type} ) {
   return <div>
-    <label htmlFor="output" id="output_label">Color Type:</label>
-    <output name="color_type" id="output"> {type} </output>
+    <label htmlFor="output_type" id="output_label">Color Type:</label>
+    <output name="color_type" id="output_type"> {type} </output>
   </div>
 };

@@ -15,10 +15,10 @@ const Header = ({ app_name }) => (
   </div>
 );
 
-function Footer({ web, text, prefix }) {
+function Footer({ web, text, prefix, test }) {
   return <div className="footer">
       {prefix}
-      <a href={web} target="_blank">
+      <a href={web} target="_blank" rel="noopener noreferrer">
         {text}
       </a>
   </div>

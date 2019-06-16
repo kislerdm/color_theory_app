@@ -37,6 +37,7 @@ export default class ColorProperties extends React.Component {
 
         <div className="color_sample" style={this.state}></div>
         <div className="color_input">
+
         <p align="center">Pick a color on slider</p>
           <HuePicker
             color={ this.state.background }
