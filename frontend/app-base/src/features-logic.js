@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { DemoSquare, Hex, Rgb, Name, Type } from './features';
+import React from 'react';
+import { Hex, Rgb, Name } from './features';
 import { HuePicker } from 'react-color';
 
 const fe_features = [
@@ -23,7 +23,12 @@ export default class ColorProperties extends React.Component {
 
     const hex = hexCut(color.hex);
 
-    const url_name = `https://color-theory-app.dkisler.com/api/name/name/hex?hexcode=${hex}`;
+    console.log(process.env.REACT_APP_URL_BACKEND_BASE);
+
+    const url_name = `${process.env.PUBLIC_URL}${process.env.REACT_APP_URL_BACKEND_BASE}?hexcode=${hex}`;
+
+    console.log(url_name);
+
     fetch(url_name)
       .then(response => response.json())
       .then(data => this.setState({ name: data.data.name }));
