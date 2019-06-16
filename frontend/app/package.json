@@ -1,11 +1,13 @@
 {
-  "name": "color_theory_app",
-  "version": "0.1.0",
-  "private": true,
+  "name": "color-theory-app",
+  "version": "1.0.1",
+  "main": "index.js",
+  "license": "MIT",
   "dependencies": {
-    "axios": "^0.18.0",
     "react": "^16.8.6",
+    "react-color": "^2.17.3",
     "react-dom": "^16.8.6",
+    "react-script": "^2.0.5",
     "react-scripts": "3.0.0"
   },
   "scripts": {
@@ -13,11 +15,7 @@
     "build_dev": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "build": "GENERATE_SOURCEMAP=false react-scripts build",
-    "deploy": "aws s3 sync build/ s3://color-theory-app"
-  },
-  "eslintConfig": {
-    "extends": "color_theory_app"
+    "build": "GENERATE_SOURCEMAP=false react-scripts build"
   },
   "browserslist": {
     "production": [
