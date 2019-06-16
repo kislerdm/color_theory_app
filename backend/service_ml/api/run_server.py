@@ -54,8 +54,8 @@ if __name__ == '__main__':
 
     app = web.Application()
 
-    app.router.add_get("/type/rgb", endpoint.get_color_cat_rgb)
-    app.router.add_get("/type/hex", endpoint.get_color_cat_hex)
+    app.router.add_get("/rgb", endpoint.get_color_cat_rgb)
+    app.router.add_get("/hex", endpoint.get_color_cat_hex)
 
     # make CORS
     cors_default_opts = aiohttp_cors.ResourceOptions(allow_credentials=True,
