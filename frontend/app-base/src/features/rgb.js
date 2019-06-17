@@ -1,12 +1,5 @@
 import React from 'react'
 
-export function Hex( {color} ) {
-  return <div>
-    <label htmlFor="code_hex" id="output_label">Color HEX Code:</label>
-    <output name="code_hex" id="code_hex"> {color} </output>
-  </div>
-};
-
 function hexToRGB( color ){
   const hex = (color.charAt(0)==="#") ? color.substring(1,7):color;
   const R = parseInt(hex.substring(0,2),16);
@@ -17,18 +10,11 @@ function hexToRGB( color ){
 
 };
 
-export function Rgb( {color} ) {
+export default function Rgb( {color} ) {
   const rgb = hexToRGB(color);
 
   return <div>
     <label htmlFor="code_rgb" id="output_label">Color RGB Code:</label>
     <output name="code_rgb" id="code_rgb"> {rgb} </output>
-  </div>
-};
-
-export function Name( {name} ) {
-  return <div>
-    <label htmlFor="output_name" id="output_label">Color Name:</label>
-    <output name="color_name" id="output_name"> {name} </output>
   </div>
 };

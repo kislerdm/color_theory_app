@@ -1,22 +1,19 @@
-FROM node:12.2.0-alpine
+FROM node:12.2.0-alpine as build
 
 LABEL maintainer="Dmitry Kisler" \
       email=admin@dkisler.com \
       web=www.dkisler.com
 
-RUN mkdir -p /app-base/src /app-base/public
-
 WORKDIR /app-base
 
-COPY ./app-base/package.json ./
-COPY ./app-base/.env ./
-COPY ./app-base/src ./src
-COPY ./app-base/public ./public
+COPY ./app-base/package.json .
+RUN yarn
 
-RUN yarn install
+COPY ./app-base .
 RUN yarn build
-RUN yarn global add serve
 
-ENV PORT 80
+FROM fnichol/uhttpd
 
-CMD serve -s build -p ${PORT}
+WORKDIR /www
+
+COPY --from=build /app-base/build .
