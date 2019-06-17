@@ -1,5 +1,5 @@
-import React, { Fragment } from 'react';
-import ColorProperties from './features-logic';
+import React, { useState } from 'react';
+import { Input, Outputs } from './features-logic';
 
 const app_name = 'Color Theory App';
 
@@ -24,12 +24,29 @@ function Footer({ web, text, prefix, test }) {
   </div>
 }
 
-const App = () => (
-  <Fragment>
-    <Header app_name={app_name} />
-    <ColorProperties />
-    <Footer {...footer_obj} />
-  </Fragment>
-);
+
+function AppContainer({ children }) {
+  return (
+    <>
+      <Header app_name={app_name} />
+      <div className="container">
+        {children}
+      </div>
+      <Footer {...footer_obj} />
+    </>
+  );
+}
+
+
+function App() {
+  const [color, setColor] = useState('#000000');
+
+  return (
+    <AppContainer>
+      <Input color={color} onChange={setColor} />
+      <Outputs color={color} />
+    </AppContainer>
+  );
+}
 
 export default App;
