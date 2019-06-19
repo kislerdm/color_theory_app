@@ -50,36 +50,6 @@ class EndPoints:
         return web.json_response(payload,
                                  status=200)
 
-    def _get_color_name(self, r: int, g: int, b: int) -> Tuple[str, str]:
-        """
-        Function to predict color name based on it's RGB code
-
-            Args:
-                r: int
-                g: int
-                b: int
-
-            Returns:
-                tuple(color name: str, error: str)
-        """
-
-        def _square(x0, x):
-            return np.square(x0 - x)
-
-        try:
-
-            color_dist = np.sqrt(_square(self.r, float(r))
-                                 + _square(self.g, float(g))
-                                 + _square(self.b, float(b)))
-
-            color = self.color_name[np.where(color_dist == color_dist.min())[0][0]]
-
-            return color, None
-
-        except Exception as e:
-            self.logger.error(f"get_color_name error: {e}")
-            return '', e
-
     def _get_payload(self, r: int, g: int, b: int) -> dict:
 
         prediction, err = self._get_color_name(r, g, b)
@@ -111,6 +81,35 @@ class EndPoints:
 
         return True, None
 
+    def _get_color_name(self, r: int, g: int, b: int) -> Tuple[str, str]:
+        """
+        Function to predict color name based on it's RGB code
+
+            Args:
+                r: int
+                g: int
+                b: int
+
+            Returns:
+                tuple(color name: str, error: str)
+        """
+
+        def _square(x0, x):
+            return np.square(x0 - x)
+
+        try:
+
+            color_dist = np.sqrt(_square(self.r, float(r))
+                                 + _square(self.g, float(g))
+                                 + _square(self.b, float(b)))
+
+            color = self.color_name[np.where(color_dist == color_dist.min())[0][0]]
+
+            return color, None
+
+        except Exception as e:
+            self.logger.error(f"get_color_name error: {e}")
+            return '', e
 
     async def get_color_name_hex(self, request):
         """
