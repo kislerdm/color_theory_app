@@ -1,4 +1,5 @@
 import json
+import pandas as pd
 import numpy as np
 from aiohttp import web
 from typing import Tuple
@@ -10,16 +11,22 @@ class EndPoints:
     Class for base API endpoints
     """
 
-    def __init__(self, logger, data, content_type: str = 'applicaiton/json'):
+    def __init__(self,
+                 logger,
+                 data: pd.DataFrame,
+                 secrets: dict = None,
+                 content_type: str = 'applicaiton/json'):
         """
             Args:
                 logger: logging instance
-                path_data: path to csv data file
+                data: pd.DataFrame data sample
+                secrets: dict with accepted APIKEYS
                 content_type: API response type
         """
 
         self.content_type = content_type
         self.logger = logger
+        self.secrets = secrets
         self.r = data['r'].astype(np.int16)
         self.g = data['g'].astype(np.int16)
         self.b = data['b'].astype(np.int16)
@@ -37,13 +44,42 @@ class EndPoints:
         """
 
         if not payload:
-            return web.Response(body=json.dumps({"data": None}),
-                                status=500,
-                                content_type=self.content_type)
+            return web.json_response({"data": None},
+                                     status=500)
 
-        return web.Response(body=json.dumps(payload),
-                            status=200,
-                            content_type=self.content_type)
+        return web.json_response(payload,
+                                 status=200)
+
+    def _get_payload(self, r: int, g: int, b: int) -> dict:
+
+        prediction, err = self._get_color_name(r, g, b)
+
+        if err:
+            return None
+
+        return {'data': {
+                    "color": {'r': r, 'g': g, 'b': b},
+                    'name': prediction
+                    }
+                }
+
+    async def _is_auth(self, headers) -> web.Response:
+        """
+        Function to test client authenticaiton
+            Args:
+                headers: request API headers dict
+
+            Returns:
+                web.Response
+        """
+
+        if headers.get('APIKEY') is None:
+            return False, "No APIKEY provided"
+
+        if headers.get('APIKEY') not in self.secrets.values():
+            return False, "Wrong APIKEY provided"
+
+        return True, None
 
     def _get_color_name(self, r: int, g: int, b: int) -> Tuple[str, str]:
         """
@@ -75,30 +111,22 @@ class EndPoints:
             self.logger.error(f"get_color_name error: {e}")
             return '', e
 
-    def _get_payload(self, r: int, g: int, b: int) -> dict:
-
-        prediction, err = self._get_color_name(r, g, b)
-
-        if err:
-            return None
-
-        return {'data': {
-                    "color": {'r': r, 'g': g, 'b': b},
-                    'name': prediction
-                    }
-                }
-
-    def get_color_name_hex(self, request):
+    async def get_color_name_hex(self, request):
         """
         Function to get the color name by it's HEX code
             Args:
-                request with HEX parameter query string
+                request API request with HEX parameter query string
 
             Returns:
-                str
+                web.Response
         """
 
         try:
+            flag, err = await self._is_auth(headers=request.headers)
+            if err:
+                return web.HTTPForbidden(content_type=self.content_type,
+                                         text=err)
+
             if "hexcode" not in request.query.keys():
                 return self._response_api()
 
@@ -117,17 +145,22 @@ class EndPoints:
             self.logger.error(e)
             return self._response_api()
 
-    def get_color_name_rgb(self, request):
+    async def get_color_name_rgb(self, request):
         """
         Function to get the color name by it's HEX code
             Args:
-                request with r,g,b parameters query string
+                request API request with r,g,b parameters query string
 
             Returns:
-                str
+                web.Response
         """
 
         try:
+            flag, err = await self._is_auth(headers=request.headers)
+            if err:
+                return web.HTTPForbidden(content_type=self.content_type,
+                                         text=err)
+
             if [i for i in ['r', 'g', 'b'] if i not in request.query.keys()]:
                 return self._response_api()
 
