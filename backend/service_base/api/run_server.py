@@ -70,8 +70,8 @@ if __name__ == '__main__':
                                                      allow_methods=["GET"])
 
     cors = aiohttp_cors.setup(app, defaults={
-        'color-theory-app-base.dkisler.com': cors_default_opts,
-        'color-theory-app.dkisler.com': cors_default_opts
+        'https://color-theory-app-base.dkisler.com': cors_default_opts,
+        'https://color-theory-app.dkisler.com': cors_default_opts
     })
 
     for route in list(app.router.routes()):
