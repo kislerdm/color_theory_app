@@ -68,13 +68,13 @@ if __name__ == '__main__':
     app.router.add_get("/hex", endpoint.get_color_cat_hex)
 
     # make CORS
-    cors_default_opts = aiohttp_cors.ResourceOptions(allow_credentials=True,
+    cors_default_opts = aiohttp_cors.ResourceOptions(allow_credentials=False,
                                                      expose_headers="*",
-                                                     allow_headers="*",
+                                                     allow_headers=("Content-Type", "APIKEY"),
                                                      allow_methods=["GET"])
 
     cors = aiohttp_cors.setup(app, defaults={
-        "*": cors_default_opts
+        'color-theory-app.dkisler.com': cors_default_opts
     })
 
     for route in list(app.router.routes()):
