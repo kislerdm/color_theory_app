@@ -22,4 +22,4 @@ COPY service_base/api ./
 # get port variable
 ENV PORT 4500
 
-CMD python3 run_server.py -p ${PORT}
+CMD python3 /backend/api/run_server.py -p ${PORT}

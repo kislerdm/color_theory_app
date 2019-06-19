@@ -48,7 +48,9 @@ if __name__ == '__main__':
 
     logger.info(f"Launch API throuh port {port}")
 
-    apikeys = json.load(open(PATH_secrets, 'r'))
+    apikeys = None
+    if os.path.isfile(PATH_secrets):
+        apikeys = json.load(open(PATH_secrets, 'r'))
 
     # get endpoints
     endpoint = EndPoints(logger=logger,
@@ -68,7 +70,8 @@ if __name__ == '__main__':
                                                      allow_methods=["GET"])
 
     cors = aiohttp_cors.setup(app, defaults={
-        '*': cors_default_opts
+        'color-theory-app-base.dkisler.com': cors_default_opts,
+        'color-theory-app.dkisler.com': cors_default_opts
     })
 
     for route in list(app.router.routes()):

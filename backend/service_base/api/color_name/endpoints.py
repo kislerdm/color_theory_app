@@ -73,6 +73,9 @@ class EndPoints:
                 web.Response
         """
 
+        if self.secrets is None:
+            return True, None
+
         if headers.get('APIKEY') is None:
             return False, "No APIKEY provided"
 
