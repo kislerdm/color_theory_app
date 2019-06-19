@@ -8,11 +8,23 @@ class EndPoints:
     Class for API endpoints
     """
 
-    def __init__(self, logger, predictor, content_type='applicaiton/json', ):
+    def __init__(self,
+                 logger,
+                 predictor,
+                 secrets: dict = None,
+                 content_type: str = 'applicaiton/json', ):
+        """
+            Args:
+                logger: logging instance
+                predictor: model with predict method
+                secrets: dict with accepted APIKEYS
+                content_type: API response type
+        """
 
         self.content_type = content_type
         self.logger = logger
         self.predictor = predictor
+        self.secrets = secrets
 
     def _response_api(self, payload=None) -> web.Response:
         """
@@ -42,12 +54,30 @@ class EndPoints:
             return None
 
         return {'data': {
-            "color": {'r': r, 'g': g, 'b': b},
-            'is_warm': prediction
-        }
-        }
+                        "color": {'r': r, 'g': g, 'b': b},
+                        'is_warm': prediction
+                        }
+                }
 
-    def get_color_cat_rgb(self, request):
+    async def _is_auth(self, headers) -> web.Response:
+        """
+        Function to test client authenticaiton
+            Args:
+                headers: request API headers dict
+
+            Returns:
+                web.Response
+        """
+
+        if headers.get('APIKEY') is None:
+            return False, "No APIKEY provided"
+
+        if headers.get('APIKEY') not in self.secrets.values():
+            return False, "Wrong APIKEY provided"
+
+        return True, None
+
+    async def get_color_cat_rgb(self, request):
         """
         Function to predict the color category; 1 - warm, 0 - cool
 
@@ -59,6 +89,11 @@ class EndPoints:
         """
 
         try:
+            flag, err = await self._is_auth(headers=request.headers)
+            if err:
+                return web.HTTPForbidden(content_type=self.content_type,
+                                         text=err)
+
             if [i for i in ['r', 'g', 'b'] if i not in request.query.keys()]:
                 return self._response_api()
 
@@ -74,7 +109,7 @@ class EndPoints:
             self.logger.error(e)
             return self._response_api()
 
-    def get_color_cat_hex(self, request):
+    async def get_color_cat_hex(self, request):
         """
         Function to predict the color category; 1 - warm, 0 - cool
 
@@ -86,6 +121,11 @@ class EndPoints:
         """
 
         try:
+            flag, err = await self._is_auth(headers=request.headers)
+            if err:
+                return web.HTTPForbidden(content_type=self.content_type,
+                                         text=err)
+
             if "hexcode" not in request.query.keys():
                 return self._response_api()
 

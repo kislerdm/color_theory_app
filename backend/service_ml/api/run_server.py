@@ -1,6 +1,7 @@
 import os
 import sys
 import time
+import json
 from aiohttp import web
 import aiohttp_cors
 from color_theory_app_backend_libs import utils
@@ -15,6 +16,9 @@ CONTENT_TYPE = 'applicaiton/json'
 # dir settings
 PATH = os.path.dirname(os.path.abspath(__file__))
 PATH_log = os.path.join(PATH, 'logs')
+
+# secrets - API keys list
+PATH_secrets = os.path.join(PATH, 'secrets.json')
 
 # dir for model
 DIR_model = os.path.join(os.path.dirname(PATH), 'ml/model')
@@ -37,6 +41,10 @@ if __name__ == '__main__':
     argumets = utils.get_args()
     port = argumets.port
 
+    apikeys = None
+    if os.path.isfile(PATH_secrets):
+        apikeys = json.load(open(PATH_secrets, 'r'))
+
     logger.info(f"Launch API throuh port {port}")
 
     try:
@@ -44,8 +52,10 @@ if __name__ == '__main__':
         predictor = Predict(logger=logger, path_model=PATH_model)
 
         # get endpoints
-        endpoint = EndPoints(
-            logger=logger, predictor=predictor, content_type=CONTENT_TYPE)
+        endpoint = EndPoints(logger=logger,
+                             predictor=predictor,
+                             content_type=CONTENT_TYPE,
+                             secrets=apikeys)
 
     except Exception as e:
         logger.error(e)
