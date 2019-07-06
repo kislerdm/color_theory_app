@@ -95,7 +95,7 @@ color_type
       └── train
 ```
 
-The machine learning service consumes the <em>model</em> from `./service_ml/ml/model/` and predicts a color class/type based on the input color code:
+The machine learning service consumes the <em>model</em> from `./color_type/ml/model/` and predicts a color class/type based on the input color code:
 
 ```python
 model.predict(pandas.DataFrame({'r': [r_in],
