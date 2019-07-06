@@ -43,7 +43,7 @@ docker-compose: "ver. >= 1.23.2"
   
   Use jupyter lab/notebook: `./server/color_type/ml/train/ml_steps.ipynb`
 
-  7. Iterate and improve the model, model v2 In[16] - In[24]
+  7. Iterate and improve the model, model v2: In[16] - In[24]
 
 - Data Science/ML Engineering/Data Engineering team:
 
