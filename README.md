@@ -25,7 +25,7 @@ docker-compose: "ver. >= 1.23.2"
 ## Steps
 - Data Science team:
   
-Use jupyter lab/notebook: `./server/color_type/ml/train/ml_steps.ipynb`
+  Use jupyter lab/notebook: `./server/color_type/ml/train/ml_steps.ipynb`
   
   1. Scoping the problem
   2. Collect the data
@@ -34,14 +34,14 @@ Use jupyter lab/notebook: `./server/color_type/ml/train/ml_steps.ipynb`
 
 - Data Science/ML Engineering/Data Engineering team:
   
-Develop `./server/color_type/api/run_server.py`
+  Develop `./server/color_type/api/run_server.py`
 
   5. Build the ML service to deploy the model v1
   6. Integrate to the app
 
 - Data Science team:
   
-Use jupyter lab/notebook: `./server/color_type/ml/train/ml_steps.ipynb`
+  Use jupyter lab/notebook: `./server/color_type/ml/train/ml_steps.ipynb`
 
   7. Iterate and improve the model, model v2 In[16] - In[24]
 
