@@ -1,30 +1,30 @@
 #!/bin/bash
 
 # script to build the images and run micro-service containers:
-# backend
-# frontend
+# server/backend
+# client/frontend
 
 # images name
 IMAGE=color_theory_app
 FILE=docker-compose.yaml
 
 # ports
-PORT_FE0=3000
+PORT_FE0=10000
 PORT_FE=${PORT_FE0}
 
-PORT_BE_BASE0=4500
-PORT_BE_BASE=${PORT_BE_BASE0}
+PORT_BE_NAME0=10002
+PORT_BE_NAME=${PORT_BE_NAME0}
 
-PORT_BE_ML0=4501
-PORT_BE_ML=${PORT_BE_ML0}
+PORT_BE_TYPE0=10003
+PORT_BE_TYPE=${PORT_BE_TYPE0}
 
 
 # backend API end-point
-BACKEND_API_BASE0=http://localhost:${PORT_BE_BASE}
-BACKEND_API_BASE=${BACKEND_API_BASE0}
+BACKEND_API_NAME0="http://0.0.0.0:${PORT_BE_NAME}/hex"
+BACKEND_API_NAME=${BACKEND_API_NAME0}
 
-BACKEND_API_ML0=http://localhost:${PORT_BE_ML}
-BACKEND_API_ML=${BACKEND_API_ML0}
+BACKEND_API_TYPE0="http://0.0.0.0:${PORT_BE_TYPE}/hex"
+BACKEND_API_TYPE=${BACKEND_API_TYPE0}
 
 # flags
 FORCE=0
@@ -33,23 +33,25 @@ FORCE=0
 usage () {
     cat <<HELP_USAGE
 
-    $0 -f --image --force --port_be_base --port_be_ml --port_fe --urlbase --urlml
+    ${IMAGE} launcher
 
-   -f docker-compose file
+    Run: sh $0 [--file --image --force --port_be_name --port_be_type --port_fe --url_name --url_type]
 
-   --image image name
+   --file docker-compose file [optional; detauls ${FILE}]
 
-   --force force rebuild
+   --image image name [optional; 0, or 1: default ${IMAGE}]
 
-   --port_be_base Port to expose backend BASE API end-point [default ${PORT_BE_BASE0}].
+   --force force rebuild [optional; default ${FORCE}]
+   
+   --port_fe Port to serve client app [optional; default ${PORT_FE0}]
 
-   --port_be_ml Port to expose backend ML API end-point [default ${PORT_BE_ML0}].
+   --port_be_name Port to expose backend color_name serivce API end-point [optional; default ${PORT_BE_NAME0}]
 
-   --port_fe Port to serve frontend app [default ${PORT_FE0}].
+   --port_be_type Port to expose backend color_type service API end-point [optional; default ${PORT_BE_TYPE0}]
 
-   --urlbase URL to access backend BASE API by the frontend app [delafut ${BACKEND_API_BASE0}]
+   --url_name URL to access backend BASE API by the frontend app [optional; delafut ${BACKEND_API_NAME0}]
 
-   --urlml URL to access backend ML API by the frontend app [delafut ${BACKEND_API_ML0}]
+   --url_type URL to access backend ML API by the frontend app [optional; delafut ${BACKEND_API_TYPE0}]
 
 HELP_USAGE
 }
@@ -61,7 +63,7 @@ msg () {
 # parse arguments
 while [ "$1" != "" ]; do
     case $1 in
-        -f )                    shift
+        --file )                shift
                                 FILE=$1
                                 ;;
         --image )               shift
@@ -70,20 +72,20 @@ while [ "$1" != "" ]; do
         --force )               shift
                                 FORCE=1
                                 ;;
-        --port_be_base )        shift
-                                PORT_BE_BASE=$1
-                                ;;
-        --port_be_ml )          shift
-                                PORT_BE_ML=$1
-                                ;;
         --port_fe )             shift
                                 PORT_FE=$1
+                                ;;                                
+        --port_be_name )        shift
+                                PORT_BE_NAME=$1
                                 ;;
-        --urlbase )             shift
-                                BACKEND_API_BASE=$1
+        --port_be_type )        shift
+                                PORT_BE_TYPE=$1
+                                ;;        
+        --url_name )            shift
+                                BACKEND_API_NAME=$1
                                 ;;
-        --urlml )               shift
-                                BACKEND_API_ML=$1
+        --url_type )            shift
+                                BACKEND_API_TYPE=$1
                                 ;;
         -h | --help )           usage
                                 exit
@@ -100,22 +102,22 @@ if [ ! -f ${FILE} ]; then
 fi
 
 # check the API URL
-if [[ ( ! ${PORT_BE_BASE} -eq ${PORT_BE_BASE0} ) &&
-     ( "${BACKEND_API_BASE}" == "${BACKEND_API_BASE0}" ) ]]; then
-       BACKEND_API_BASE=http://localhost:${PORT_BE_BASE}
+if [[ ( ! ${PORT_BE_NAME} -eq ${PORT_BE_NAME0} ) &&
+     ( "${BACKEND_API_NAME}" == "${BACKEND_API_NAME0}" ) ]]; then
+       BACKEND_API_NAME="http://0.0.0.0:${PORT_BE_NAME}/hex"
 fi
 
-if [[ ( ! ${PORT_BE_ML} -eq ${PORT_BE_ML0} ) &&
-     ( "${BACKEND_API_ML}" == "${BACKEND_API_ML0}" ) ]]; then
-       BACKEND_API_ML=http://localhost:${PORT_BE_ML}
+if [[ ( ! ${PORT_BE_TYPE} -eq ${PORT_BE_TYPE0} ) &&
+     ( "${BACKEND_API_TYPE}" == "${BACKEND_API_TYPE0}" ) ]]; then
+       BACKEND_API_TYPE="http://0.0.0.0:${PORT_BE_TYPE}/hex"
 fi
 
 # export variables
-export PORT_BE_BASE=${PORT_BE_BASE}
-export PORT_BE_ML=${PORT_BE_ML}
+export PORT_BE_NAME=${PORT_BE_NAME}
+export PORT_BE_TYPE=${PORT_BE_TYPE}
 export PORT_FE=${PORT_FE}
-export BACKEND_API_BASE=${BACKEND_API_BASE}
-export BACKEND_API_ML=${BACKEND_API_ML}
+export BACKEND_API_NAME=${BACKEND_API_NAME}
+export BACKEND_API_TYPE=${BACKEND_API_TYPE}
 
 # build and run microservices containers
 

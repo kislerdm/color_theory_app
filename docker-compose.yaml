@@ -2,30 +2,26 @@ version:          '3.7'
 
 services:
 
-  backend_base:
+  server-color_name:
     build:
-      context:    './backend'
-      dockerfile: 'service_base/Dockerfile'
+      context:    './server'
+      dockerfile: 'color_name/Dockerfile'
     ports:
-      - "10002:4500"
+      - "${PORT_BE_NAME}:4500"
 
-  backend_ml:
+  server-color_type:
     build:
-      context:    './backend'
-      dockerfile: 'service_ml/Dockerfile'
+      context:    './server'
+      dockerfile: 'color_type/api/Dockerfile'
     ports:
-      - "10003:4500"
+      - "${PORT_BE_TYPE}:4500"
 
-  frontend_base:
+  client:
     build:
-      context:    './frontend'
-      dockerfile: 'Dockerfile-base'
-    ports:
-      - "10000:80"
-
-  frontend:
-    build:
-      context:    './frontend'
+      context:    './client'
       dockerfile: 'Dockerfile'
+      args: 
+        URL_BACKEND_NAME: ${BACKEND_API_NAME}
+        URL_BACKEND_TYPE: ${BACKEND_API_TYPE}
     ports:
-      - "10001:80"
+      - "${PORT_FE}:80"
