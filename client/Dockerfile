@@ -9,9 +9,17 @@ WORKDIR /app
 COPY ./app/package.json .
 RUN yarn
 
+ARG URL_BACKEND_NAME
+ENV URL_BACKEND_NAME ${URL_BACKEND_NAME}
+
+ARG URL_BACKEND_TYPE
+ENV URL_BACKEND_TYPE ${URL_BACKEND_TYPE}
+
 COPY ./app .
 
-RUN yarn build
+RUN echo 'REACT_APP_URL_BACKEND_NAME=${URL_BACKEND_NAME}' > .env \
+    && echo 'REACT_APP_URL_BACKEND_TYPE=${URL_BACKEND_TYPE}' >> .env \
+    && yarn build
 
 FROM fnichol/uhttpd as serve
 

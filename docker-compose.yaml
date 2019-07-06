@@ -20,10 +20,8 @@ services:
     build:
       context:    './client'
       dockerfile: 'Dockerfile'
-    env_file:   
-      - ./client/app/.env
-    environment: 
-      - REACT_APP_URL_BACKEND_NAME=${BACKEND_API_NAME}
-      - REACT_APP_URL_BACKEND_TYPE=${BACKEND_API_TYPE}
+      args: 
+        URL_BACKEND_NAME: ${BACKEND_API_NAME}
+        URL_BACKEND_TYPE: ${BACKEND_API_TYPE}
     ports:
       - "${PORT_FE}:80"
