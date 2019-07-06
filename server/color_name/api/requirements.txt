@@ -1,0 +1,4 @@
+aiohttp-cors==0.7.0
+pandas==0.24.2
+numpy==1.16.3
+./libs
