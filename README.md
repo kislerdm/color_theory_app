@@ -1,8 +1,49 @@
-# Color Theory <a href="https://color-theory-app.dkisler.com" target="_blank">App</a>
+# How to power up your product by machine learning with python micro-service
+## Europython 2019-07-08
+### 02.S.21
 
-## Description
+Presentation can be found <a href="https://www.dkisler.com/europython2019" targer="_blank">here</a>
 
-A toy project/demo on how to structure and develop micro-service driven application powered by machine learning service.
+## Requirements
+
+In order to go through the steps of workshop, you should have the following software installed:
+
+```yaml
+python: "ver. >= 3.6.5"
+libraries:
+  - aiohttp: "ver. >= 3.5.4"
+  - aiohttp-cors: "ver. >= 0.7.0"
+  - pandas: "ver. >= 0.24.2"
+  - numpy: "ver. >= 1.16.3"
+  - scipy: "ver. >= 1.3.0"
+  - jupyterlab: "ver. >= 1.3.0"
+
+docker: "ver. >= 18.09"
+docker-compose: "ver. >= 1.23.2"
+```
+
+## Steps
+- Data Science team:
+Use jupyter lab/notebook: `./server/color_type/ml/train/ml_steps.ipynb`
+  
+  1. Scoping the problem
+  2. Collect the data
+  3. Data EDA: In[3] - In[7]
+  4. Build a baseline model, model v1: In[9] - In[15]
+
+- Data Science/ML Engineering/Data Engineering team:
+Develop `./server/color_type/api/run_server.py`
+
+  5. Build the ML service to deploy the model v1
+  6. Integrate to the app
+
+- Data Science team:
+Use jupyter lab/notebook: `./server/color_type/ml/train/ml_steps.ipynb`
+  7. Iterate and improve the model, model v2 In[16] - In[24]
+
+- Data Science/ML Engineering/Data Engineering team:
+
+  8. Deploy the model v2
 
 ### Motivation
 
