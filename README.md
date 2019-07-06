@@ -137,7 +137,7 @@ consume data from data dir -> train and evaluate the model -> model export into 
   </tr>
   <tr>
     <td>
-    Base service
+    Base Service/<br>Color Name
     </td>
     <td>
     <pre>
@@ -169,7 +169,7 @@ consume data from data dir -> train and evaluate the model -> model export into 
   </tr>
   <tr>
     <td>
-    ML service
+    ML Service/<br>Color Type
     </td>
     <td>
     <pre>
