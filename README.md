@@ -24,17 +24,19 @@ The app objective is to define **binary category** of a color selected by user. 
 
 ## App Structure
 
-```
+```bash
 color_theory_app
-    ├── backend
-    ├── frontend
-    └── docker-compose.yaml
+    ├── server
+    ├── client
+    ├── docker-compose.yaml
+    └── launch_services.sh
+
 ```
 
 The app has two service sides, frontend and backend:
 
-- *frontend/client side* can be generalised as the product with developers + DevOps maintaining and developing it
-- *backend/server side* can be generalised as the micro-service with data scientist/engineers + machine learning engineers + developers + Dev-/DataOps maintaining and developing it
+- *client/frontend side* can be generalised as the product with developers + DevOps maintaining and developing it
+- *server/backend side* can be generalised as the micro-service with data scientist/engineers + machine learning engineers + developers + Dev-/DataOps maintaining and developing it
 
 Frontend/product communicates to the backend (e.g. machine-learning service) to provide users unique feature, or improve users experience.
 
@@ -42,35 +44,35 @@ Frontend/product communicates to the backend (e.g. machine-learning service) to 
 
 Backend has the interface(s) to communicate with other services (fronted service in our case) with a set of end-points.
 
-```
-backend
-    ├── libs
-    ├── service_base
-    └── service_ml
+```bash
+server
+    ├── common_libs
+    ├── color_name
+    └── color_type
 ```
 
 The app's server side has two micro-services with HTTP interfaces (API end-points):
 
-- service_base - provides color name
-- service_ml - provides color binary class/type
+- color_name - provides color name
+- color_type - provides color binary class/type
 
 Both services API's have similar code structure:
 
-```
+```bash
 service
   └── api
-       ├── app
-       │    ├── sub-mobules/data
-       │    ├── __init__.py   
+       ├── sub-mobules
+       │    ├── __init__.py
        │    ├── ...
-       │    └── endpoints.py       
+       │    └── module.py
+       ├── Dockerfile
        ├── requirements.txt
        └── run_server.py
 ```
 
 With service runner/executable, `` run_server.py ``.
 
-#### Base Service
+#### Base Service - Color Name
 
 The service requires an input color as the HEX, or RGB code and returns the color name. The color name of a given color is identified as the reference color name based on the Euclidian distance between an input color and the reference <em>in-memory</em> colors data set:
 
@@ -82,18 +84,18 @@ The service requires an input color as the HEX, or RGB code and returns the colo
 
 The service delivers the product feature <em>F2</em> (see [infrastructure](#infra)).
 
-#### ML Service
+#### ML Service - Color Type
 
-```
-service_ml
+```bash
+color_type
   ├── Dockerfile
   ├── api
   └── ml
       ├── model
-      └── ...
+      └── train
 ```
 
-The machine learning service consumes the <em>model</em> from `./service_ml/ml/model/` and predicts a color class/type based on the input color code:
+The machine learning service consumes the <em>model</em> from `./color_type/ml/model/` and predicts a color class/type based on the input color code:
 
 ```python
 model.predict(pandas.DataFrame({'r': [r_in],
@@ -105,18 +107,22 @@ The service delivers the product feature <em>F3</em> (see [infrastructure](#infr
 
 #### Machine Learning Model Development
 
-```
+```bash
 ml
-├── data
-│   └── warm_cold_colors.csv
 ├── model
-│   └── model_v1.xgb
-└── model.ipynb
+│   ├── v1
+│   │   └── model_v1.sav
+│   └── v2
+│       └── model_v2.sav
+└── train
+    ├── data
+    │   └── warm_cold_colors.csv
+    └── ml_steps.ipynb
 ```
 
 The models can be *iteratively* developed by the data science team according to the flow:
 
-```
+```bash
 consume data from data dir -> train and evaluate the model -> model export into model dir -> model quality monitoring -> model re-train
 ```
 
@@ -228,7 +234,7 @@ git clone git@github.com:kislerdm/color_theory_app.git && cd color_theory_app
 and build&run docker images with services and the client app
 
 ```bash
-docker-compose up -d
+sh launch_services.sh
 ```
 
-Upon docker images build completion and when docker containers are up and running, you can access UI by going to http://localhost:10001 (features <em>F1+F2+F3</em>), or http://localhost:10000 (features <em>F1+F2</em>) in your browser.
+Upon docker images build completion and when docker containers are up and running, you can access UI by going to http://localhost:10000 in your browser.
