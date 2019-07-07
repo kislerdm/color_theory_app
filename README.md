@@ -6,21 +6,29 @@ Presentation can be found <a href="https://www.dkisler.com/europython2019" targe
 
 ## Requirements
 
-In order to go through the steps of workshop, you should have the following software installed:
+In order to go through the steps of workshop, you should have the following (recommended) software installed:
 
 ```yaml
-python: "ver. >= 3.6.5"
-libraries:
-  - aiohttp: "ver. >= 3.5.4"
-  - aiohttp-cors: "ver. >= 0.7.0"
-  - pandas: "ver. >= 0.24.2"
-  - numpy: "ver. >= 1.16.3"
-  - scipy: "ver. >= 1.3.0"
-  - jupyterlab: "ver. >= 1.3.0"
-
-docker: "ver. >= 18.09"
+python: "ver. >= 3.7.3"
+docker: "ver. >= 18.09.2"
 docker-compose: "ver. >= 1.23.2"
 ```
+
+To install python packages, execute in the command line:
+
+```bash
+python3 -m venv workshop \
+&& source workshop/bin/activate \
+&& python3 -m pip install --install-option="--prefix=./workshop/pkgs" --no-cache-dir -r requirements_workshop.txt
+```
+
+You can just install packages on the system level either:
+
+```bash
+python3 -m pip install --no-cache-dir -r requirements_workshop.txt
+```
+
+Installing xgboost may be tricky, so please check the instructions <a href="https://xgboost.readthedocs.io/en/latest/build.html" targer="_blank">here</a>.
 
 ## Steps
 - Data Science team:

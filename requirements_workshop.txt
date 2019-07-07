@@ -1,0 +1,7 @@
+aiohttp==3.5.4
+aiohttp-cors==0.7.0
+jupyterlab==0.35.6
+numpy==1.16.3
+pandas==0.24.2
+scikit-learn==0.21.2
+./server/common_libs
