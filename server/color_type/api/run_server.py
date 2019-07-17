@@ -118,7 +118,8 @@ if __name__ == "__main__":
 
     cors = aiohttp_cors.setup(app, defaults={
         'http://localhost:3000': cors_default_opts,
-        'http://localhost:10000': cors_default_opts
+        'http://localhost:10000': cors_default_opts,
+        'https://color-theory-app.dkisler.com': cors_default_opts
     })
 
     for route in list(app.router.routes()):
