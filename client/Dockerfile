@@ -17,8 +17,8 @@ ENV URL_BACKEND_TYPE ${URL_BACKEND_TYPE}
 
 COPY ./app .
 
-RUN echo 'REACT_APP_URL_BACKEND_NAME=${URL_BACKEND_NAME}' > .env \
-    && echo 'REACT_APP_URL_BACKEND_TYPE=${URL_BACKEND_TYPE}' >> .env \
+RUN echo REACT_APP_URL_BACKEND_NAME="${URL_BACKEND_NAME}" > .env \
+    && echo REACT_APP_URL_BACKEND_TYPE="${URL_BACKEND_TYPE}" >> .env \
     && yarn build
 
 FROM fnichol/uhttpd as serve
