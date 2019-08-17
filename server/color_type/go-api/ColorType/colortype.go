@@ -112,7 +112,8 @@ func byHEX(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	var PORT = 4501
+	var PORT = 4500
+
 	http.HandleFunc("/rgb", byRGB)
 	http.HandleFunc("/hex", byHEX)
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", PORT), nil))
